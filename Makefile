@@ -62,3 +62,8 @@ build-app-deploy: ## Build the (prod) Docker image
 
 start-app-deploy: stop-app-deploy build-app-deploy ## Start the (prod) Docker image
 	$(DOCKER_COMPOSE) -f docker-compose-deploy.yml up -d
+
+GIT_CLEAN_OPTIONS := -d -x --force --interactive --exclude=.env
+
+clean: ## Clean up the environment
+	@git clean $(GIT_CLEAN_OPTIONS)
