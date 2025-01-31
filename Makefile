@@ -35,7 +35,7 @@ createsuperuser: build-app ## Create (dev) superuser
 	$(DOCKER_COMPOSE) run --rm app sh -c "python manage.py createsuperuser"
 
 stop-app: ## Stop (dev) app
-	-$(DOCKER_COMPOSE) down --volumes --remove-orphans
+	-$(DOCKER_COMPOSE) down --remove-orphans
 
 start-app: stop-app build-app ## Start (dev) app
 	$(DOCKER_COMPOSE) up -d
@@ -55,10 +55,15 @@ createsuperuser-deploy: build-app-deploy ## Create (prod) superuser
 	$(DOCKER_COMPOSE) -f docker-compose-deploy.yml run --rm app sh -c "python manage.py createsuperuser"
 
 stop-app-deploy: ## Stop the (prod) Docker image
-	-$(DOCKER_COMPOSE) -f docker-compose-deploy.yml down --volumes --remove-orphans
+	-$(DOCKER_COMPOSE) -f docker-compose-deploy.yml down --remove-orphans
 
 build-app-deploy: ## Build the (prod) Docker image
 	$(DOCKER_COMPOSE) -f docker-compose-deploy.yml build
 
 start-app-deploy: stop-app-deploy build-app-deploy ## Start the (prod) Docker image
 	$(DOCKER_COMPOSE) -f docker-compose-deploy.yml up -d
+
+GIT_CLEAN_OPTIONS := -d -x --force --interactive --exclude=.env
+
+clean: ## Clean up the environment
+	@git clean $(GIT_CLEAN_OPTIONS)
