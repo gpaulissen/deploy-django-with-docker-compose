@@ -9,6 +9,7 @@ server {
         alias /vol/static/media;
     }
 
+# static files handled by whitenoise
     location /static/static {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header Host $http_host;
