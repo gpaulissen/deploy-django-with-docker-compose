@@ -5,8 +5,15 @@ upstream app_server {
 server {
     listen ${LISTEN_PORT};
 
-    location /static {
-        alias /vol/static;
+    location /static/media {
+        alias /vol/static/media;
+    }
+
+    location /static/static {
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+        proxy_pass http://app_server;
     }
 
     location / {
