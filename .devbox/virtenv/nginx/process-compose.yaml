@@ -28,6 +28,8 @@ processes:
       python manage.py check --database default
       python manage.py migrate
       python manage.py runserver 0.0.0.0:8000
+    environment:
+      - DEBUG=1
     depends_on:
       db:
         condition: process_started
