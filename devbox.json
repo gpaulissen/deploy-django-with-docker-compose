@@ -36,7 +36,7 @@
             "devbox run --env-file ./.env collectstatic",
             "devbox run --env-file ./.env wait-for-db",
             "devbox run --env-file ./.env migrate",
-            "python manage.py runserver 0.0.0.0:8000",
+            "python manage.py runserver 8000",
         ],
         "build-docker-dev": [
             "docker-compose build --build-arg UID=$(id -u)",

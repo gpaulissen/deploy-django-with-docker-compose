@@ -16,7 +16,7 @@ case "${DEBUG:-0}" in
         uwsgi --socket :9000 --workers 4 --master --enable-threads --module app.wsgi
         ;;
     *)
-        python manage.py runserver 0.0.0.0:8000
+        python manage.py runserver 8000
         ;;
 esac
 
