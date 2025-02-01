@@ -1,28 +1,53 @@
 {
-    "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.13.7/.schema/devbox.schema.json",
-    "packages": [
-        "nginx@latest",
-        "docker-compose@latest"
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.13.7/.schema/devbox.schema.json",
+  "packages": [
+    "nginx@latest",
+    "docker-compose@latest",
+    "poetry@2.0.0",
+    "python@3.13.0",
+  ],
+  "shell": {
+    "init_hook": [
+      "echo 'Welcome to devbox!' > /dev/null",
     ],
-    "shell": {
-        "init_hook": [
-            "echo 'Welcome to devbox!' > /dev/null"
+    "scripts": {
+        "start-db": [
+            "docker-compose -f docker-compose-db.yml up --detach",
         ],
-        "scripts": {
-            "test": [
-                "echo \"Error: no test specified\" && exit 1"
-            ],
-            "build-web-dev": [
-                "docker-compose build --build-arg UID=$(id -u)"
-            ],
-            "makemigrations-dev": [
-                "docker-compose run --rm app sh -c \"python manage.py makemigrations\"",
-            ],
-            "run-web-dev": [
-                "devbox run build-web-dev",
-                "devbox run makemigrations-dev",
-                "docker-compose up",
-            ],
-        }
-    }
+        "stop-db": [
+            "docker-compose -f docker-compose-db.yml down",
+        ],
+        "collectstatic": [
+            "python app/manage.py collectstatic --noinput"
+        ],
+        "wait-for-db": [
+            "python app/manage.py wait_for_db",
+        ],
+        "migrate": [
+            "python app/manage.py migrate",
+        ],
+        "run-dev": [
+            "devbox run start-db",
+            "devbox run collectstatic",
+            "devbox run wait-for-db",
+            "devbox run migrate",
+            "python app/manage.py runserver 0.0.0.0:8000",
+        ],
+        "build-docker-dev": [
+            "docker-compose build --build-arg UID=$(id -u)",
+        ],
+        "stop-docker-dev": [
+            "docker-compose down --remove-orphans || true",
+        ],
+        "makemigrations-dev": [
+            "docker-compose run --rm app sh -c \"python manage.py makemigrations\"",
+        ],
+        "run-docker-dev": [
+            "devbox run build-docker-dev",
+            "devbox run stop-docker-dev",
+            "devbox run makemigrations-dev",
+            "docker-compose up",
+        ],
+    },
+  },
 }

@@ -1,0 +1,18 @@
+[tool.poetry]
+description = "deploy-django-with-docker-compose"
+name = "deploy-django-with-docker-compose"
+version = "0.1.0"
+authors = ["Gert-Jan Paulissen <gertjan.paulissen@gmail.com>"]
+readme = "README.md"
+packages = [{include = "app"}]
+
+[tool.poetry.dependencies]
+python = "^3.13"
+django = "^5.1.5"
+psycopg2 = "^2.9.10"
+pyuwsgi = "^2.0.28.post1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
