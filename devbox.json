@@ -1,0 +1,28 @@
+{
+    "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.13.7/.schema/devbox.schema.json",
+    "packages": [
+        "nginx@latest",
+        "docker-compose@latest"
+    ],
+    "shell": {
+        "init_hook": [
+            "echo 'Welcome to devbox!' > /dev/null"
+        ],
+        "scripts": {
+            "test": [
+                "echo \"Error: no test specified\" && exit 1"
+            ],
+            "build-web-dev": [
+                "docker-compose build --build-arg UID=$(id -u)"
+            ],
+            "makemigrations-dev": [
+                "docker-compose run --rm app sh -c \"python manage.py makemigrations\"",
+            ],
+            "run-web-dev": [
+                "devbox run build-web-dev",
+                "devbox run makemigrations-dev",
+                "docker-compose up",
+            ],
+        }
+    }
+}

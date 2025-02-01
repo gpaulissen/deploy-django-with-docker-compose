@@ -19,3 +19,7 @@
 This is the finished source code for the tutorial [Deploying Django with Docker Compose](https://londonappdeveloper.com/deploying-django-with-docker-compose/).
 
 In this tutorial, we teach you how to prepare and deploying a Django project to an AWS EC2 instance using Docker Compose.
+
+Two interesting articles:
+- [Orchestrate your Dev Environment using Devbox](https://meijer.works/articles/orchestrate-your-dev-environment-using-devbox)
+- [Improve your Dev Stack with process-compose](https://meijer.works/articles/improve-your-dev-stack-with-process-compose)

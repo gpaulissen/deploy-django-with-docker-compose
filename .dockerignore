@@ -4,6 +4,8 @@
 
 # Docker
 .docker
+Dockerfile
+docker-compose*.yml
 
 # Python
 app/__pycache__/
@@ -16,3 +18,7 @@ venv/
 
 # Local PostgreSQL data
 data/
+
+# devbox
+.devbox/
+devbox/
