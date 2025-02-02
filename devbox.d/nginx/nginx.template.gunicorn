@@ -43,9 +43,10 @@ http {
     listen $NGINX_WEB_PORT;
     listen [::]:$NGINX_WEB_PORT;
     server_name  $NGINX_WEB_SERVER_NAME;
-    root         $NGINX_WEB_ROOT;
+#    root         $NGINX_WEB_ROOT;
+    root         $DEVBOX_PROJECT_ROOT;
 
-    error_log error.log error;
+    error_log error.log debug;
     access_log access.log;
     client_body_temp_path temp/client_body;
     proxy_temp_path temp/proxy;
@@ -55,6 +56,8 @@ http {
 		
     client_max_body_size 4G;
 
+    rewrite_log on;
+
 ##     # set the correct host(s) for your site
 ##     server_name example.com www.example.com;
 
@@ -63,12 +66,19 @@ http {
 ##     # path for static files
 ##     root /path/to/app/current/public;
 
+    location /media/ {
+#      return 200 '/media';
+      autoindex off; # Since root is already specified, static files are served directly
+    }
+
     location / {
+#      return 200 '/';
       # checks for static file, if not found proxy to app
       try_files $uri @proxy_to_app;
     }
 
     location @proxy_to_app {
+#      return 200 '@proxy_to_app';		
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_set_header X-Forwarded-Proto $scheme;
       proxy_set_header Host $http_host;

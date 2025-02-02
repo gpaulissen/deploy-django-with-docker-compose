@@ -1,4 +1,3 @@
-@ -0,0 +1,23 @@
 # The nginx.conf in this folder is automatically generated from nginx.template
 # To modify your NGINX config, edit the nginx.template file
 
