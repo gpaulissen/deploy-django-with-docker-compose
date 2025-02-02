@@ -4,8 +4,8 @@ set -ue
 set -x
 
 basedir=$(cd $(dirname $0) && pwd)/..
-ls -la ${STATIC:-$basedir/data/web/static/}
-ls -la ${MEDIA:-$basedir/data/web/media/}
+ls -la ${STATIC:-$basedir/static/}
+ls -la ${MEDIA:-$basedir/media/}
 
 whoami
 
