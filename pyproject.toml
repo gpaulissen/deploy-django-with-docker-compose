@@ -11,6 +11,7 @@ python = "^3.13"
 django = "^5.1.5"
 psycopg2 = "^2.9.10"
 pyuwsgi = "^2.0.28.post1"
+gunicorn = "^23.0.0"
 
 [build-system]
 requires = ["poetry-core"]

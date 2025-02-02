@@ -6,7 +6,7 @@ processes:
       - STATIC=$DEVBOX_PROJECT_ROOT/data/web/static/
       - MEDIA=$DEVBOX_PROJECT_ROOT/data/web/media/
     command: |
-      if [ -f $NGINX_CONFDIR/nginx.template ]; then envsubst $(awk 'BEGIN {for (k in ENVIRON) {printf "$"k","}}') < $NGINX_CONFDIR/nginx.template > $NGINX_CONFDIR/nginx.conf; fi
+      if [ -f $NGINX_CONFDIR/nginx.template.${APP_SERVER:-fastcgi} ]; then envsubst $(awk 'BEGIN {for (k in ENVIRON) {printf "$"k","}}') < $NGINX_CONFDIR/nginx.template.${APP_SERVER:-fastcgi} > $NGINX_CONFDIR/nginx.conf; fi
       nginx -p $NGINX_PATH_PREFIX -c $NGINX_CONFDIR/nginx.conf -e error.log -g "pid nginx.pid;daemon off;"
     availability:
       restart: on_failure
@@ -24,7 +24,7 @@ processes:
     availability:
       restart: on_failure
       max_restarts: 5
-  runserver:
+  app_server:
     command: |
       python manage.py collectstatic --noinput
       python manage.py wait_for_db
