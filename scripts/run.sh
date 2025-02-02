@@ -4,8 +4,9 @@ set -ue
 set -x
 
 basedir=$(cd $(dirname $0) && pwd)/..
-ls -la ${STATIC:-$basedir/static/}
-ls -la ${MEDIA:-$basedir/media/}
+
+# activate virtual environment
+. $basedir/.venv/bin/activate
 
 whoami
 
@@ -13,12 +14,15 @@ python manage.py wait_for_db
 python manage.py collectstatic --noinput
 python manage.py migrate
 
+ls -la ${STATIC:-$basedir/static/}
+ls -la ${MEDIA:-$basedir/media/}
+
 export DEBUG=1
 
 case "${APP_SERVER:-}" in
     gunicorn)
         gunicorn \
-            --bind=unix:$NGINX_TMPDIR/gunicorn.sock \
+            --bind=unix:${NGINX_TMPDIR:-$basedir/.devbox/virtenv/nginx/temp}/gunicorn.sock \
             --workers=${WORKERS:-4} \
             --threads=${THREADS:-2} \
             app.wsgi

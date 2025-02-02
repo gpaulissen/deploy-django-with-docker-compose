@@ -13,7 +13,10 @@
     "init_hook": [". .venv/bin/activate"],
       "scripts": {
         "install": [
-          "poetry lock",
+          "poetry install --no-root",
+        ],
+        "update": [
+          "poetry update",
         ],
         "clean": [
           "git clean -d -x --force --interactive --exclude=.env --exclude=.envrc --exclude media/ --exclude .gitignore",
