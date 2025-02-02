@@ -12,8 +12,11 @@
   "shell": {
     "init_hook": [". .venv/bin/activate"],
       "scripts": {
+        "install": [
+          "poetry lock --no-update",
+        ],
         "clean": [
-          "git clean -d -x --force --interactive --exclude=.env --exclude=.envrc --exclude media/ --exclude .gitignore",
+          "git clean -d -x --force --interactive --exclude=.env --exclude=.envrc --exclude media/ --exclude .gitignore --exclude .devbox/virtenv/nginx/process-compose.yaml",
         ]
     },
   },
