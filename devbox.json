@@ -13,7 +13,7 @@
     "init_hook": [". .venv/bin/activate"],
       "scripts": {
         "clean": [
-          "git clean -d -x --force --interactive --exclude=.env --exclude=.devbox --exclude=.vs --exclude=.venv --exclude=.idea --exclude=.envrc",
+          "git clean -d -x --force --interactive --exclude=.env --exclude=.envrc --exclude media/ --exclude .gitignore",
         ]
     },
   },

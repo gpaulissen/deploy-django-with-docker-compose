@@ -134,3 +134,4 @@ dmypy.json
 *~
 devbox.d/nginx/nginx.conf
 !\.devbox/virtenv/nginx/process-compose\.yaml
+\.gitignore
