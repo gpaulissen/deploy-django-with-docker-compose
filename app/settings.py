@@ -146,7 +146,9 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Django >=4
 STORAGES = {
-    # ...
+    'default': {
+        "BACKEND": 'django.core.files.storage.FileSystemStorage'
+    },
     "staticfiles": {
         "BACKEND": STATICFILES_STORAGE,
     },
