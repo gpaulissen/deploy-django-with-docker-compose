@@ -12,6 +12,7 @@ django = "^5.1.5"
 psycopg2 = "^2.9.10"
 pyuwsgi = "^2.0.28.post1"
 gunicorn = "^23.0.0"
+whitenoise = {extras = ["brotl"], version = "^6.8.2"}
 
 [build-system]
 requires = ["poetry-core"]

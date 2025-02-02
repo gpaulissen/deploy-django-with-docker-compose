@@ -11,48 +11,10 @@
   },
   "shell": {
     "init_hook": [". .venv/bin/activate"],
-    "scripts": {
-        "start-db": [
-            "docker-compose -f docker-compose-db.yml up --detach",
-        ],
-        "stop-db": [
-            "docker-compose -f docker-compose-db.yml down --remove-orphans || true",
-        ],
-        "collectstatic": [
-            "python manage.py collectstatic --noinput"
-        ],
-        "wait-for-db": [
-            "python manage.py wait_for_db",
-        ],
-        "migrate": [
-            "python manage.py migrate",
-        ],
-        "show-env": [
-            "devbox run --env-file ./.env -- env",
-        ],
-        "run-dev": [
-            "devbox run --env-file ./.env stop-db",
-            "devbox run --env-file ./.env start-db",
-            "devbox run --env-file ./.env collectstatic",
-            "devbox run --env-file ./.env wait-for-db",
-            "devbox run --env-file ./.env migrate",
-            "python manage.py runserver 8000",
-        ],
-        "build-docker-dev": [
-            "docker-compose build --build-arg UID=$(id -u)",
-        ],
-        "stop-docker-dev": [
-            "docker-compose down --remove-orphans || true",
-        ],
-        "makemigrations-dev": [
-            "docker-compose run --rm app sh -c \"python manage.py makemigrations\"",
-        ],
-        "run-docker-dev": [
-            "devbox run build-docker-dev",
-            "devbox run stop-docker-dev",
-            "devbox run makemigrations-dev",
-            "docker-compose up",
-        ],
+      "scripts": {
+        "clean": [
+          "git clean -d -x --force --interactive --exclude=.env --exclude=.devbox --exclude=.vs --exclude=.venv --exclude=.idea --exclude=.envrc",
+        ]
     },
   },
 }
