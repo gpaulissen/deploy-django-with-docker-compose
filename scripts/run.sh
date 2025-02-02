@@ -21,8 +21,9 @@ export DEBUG=1
 
 case "${APP_SERVER:-}" in
     gunicorn)
+#            --bind=unix:${NGINX_TMPDIR:-$basedir/.devbox/virtenv/nginx/temp}/gunicorn.sock \
         gunicorn \
-            --bind=unix:${NGINX_TMPDIR:-$basedir/.devbox/virtenv/nginx/temp}/gunicorn.sock \
+            --bind=:8000 \
             --workers=${WORKERS:-4} \
             --threads=${THREADS:-2} \
             app.wsgi
