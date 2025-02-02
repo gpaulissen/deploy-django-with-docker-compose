@@ -128,4 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# Custom
 /data
+/static
+/media
+*~
+devbox.d/nginx/nginx.conf
