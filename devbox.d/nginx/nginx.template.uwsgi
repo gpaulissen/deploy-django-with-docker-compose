@@ -6,8 +6,8 @@ http {
     server {
         listen       $NGINX_WEB_PORT;
         listen       [::]:$NGINX_WEB_PORT;
-        server_name  $NGINX_WEB_SERVER_NAME;
-        root         $NGINX_WEB_ROOT;
+##         server_name  $NGINX_WEB_SERVER_NAME;
+##         root         $NGINX_WEB_ROOT;
 
 				error_log error.log error;
         access_log access.log;
@@ -17,10 +17,6 @@ http {
         uwsgi_temp_path temp/uwsgi;
         scgi_temp_path temp/scgi;
 				 
-        location /static {
-            alias ${STATIC};
-        }
-
         location /media {
             alias ${MEDIA};
         }
@@ -31,7 +27,7 @@ http {
             client_max_body_size    10M;
         }
 
-        index index.html;
-        server_tokens off;
+##         index index.html;
+##         server_tokens off;
     }
 }   
