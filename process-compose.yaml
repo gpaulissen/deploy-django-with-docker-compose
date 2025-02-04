@@ -2,40 +2,10 @@ version: "0.5"
 is_strict: true
 environment:
   - NGINX_WEB_PORT=8000
+  - STATIC=$DEVBOX_PROJECT_ROOT/static/
+  - MEDIA=$DEVBOX_PROJECT_ROOT/media/
 
 processes:
-  nginx:
-    environment:
-      - STATIC=$DEVBOX_PROJECT_ROOT/static/
-      - MEDIA=$DEVBOX_PROJECT_ROOT/media/
-    command: |
-      set -eu
-      echo > $NGINX_PATH_PREFIX/access.log
-      echo > $NGINX_PATH_PREFIX/error.log
-      echo "nginx.conf.template: $NGINX_CONFDIR/nginx.template.$APP_SERVER"
-      test -f $NGINX_CONFDIR/nginx.template.$APP_SERVER
-      envsubst $(awk 'BEGIN {for (k in ENVIRON) {printf "$"k","}}') < $NGINX_CONFDIR/nginx.template.$APP_SERVER > $NGINX_CONFDIR/nginx.conf
-      nginx -p $NGINX_PATH_PREFIX -c $NGINX_CONFDIR/nginx.conf -e error.log -g "pid nginx.pid;daemon off;"
-##     availability:
-##       restart: exit_on_failure
-##       max_restarts: 5
-    depends_on:
-      app_server:
-        condition: process_started
-  nginx-error:
-    command: "tail -f $NGINX_PATH_PREFIX/error.log"
-    availability:
-      restart: "always"
-    depends_on:
-      nginx:
-        condition: process_started
-  nginx-access:
-    command: "tail -f $NGINX_PATH_PREFIX/access.log"
-    availability:
-      restart: "always"
-    depends_on:
-      nginx:
-        condition: process_started
   db:
     command: "docker-compose -f docker-compose-db.yml up"
     availability:

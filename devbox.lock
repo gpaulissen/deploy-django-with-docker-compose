@@ -258,15 +258,15 @@
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/d5b37ka97jcdax2gc3sd8bhzj2j7g6gj-nginx-1.26.2",
+              "path": "/nix/store/4gdnsgmznm92xyi7cmc68xblvz09ankm-nginx-1.26.2",
               "default": true
             },
             {
               "name": "doc",
-              "path": "/nix/store/6bm6chj2c2wymgn22hk37fg6jy7kd9cg-nginx-1.26.2-doc"
+              "path": "/nix/store/7nk935gdgxyqvyi1wnpdn9yqsda7l4wi-nginx-1.26.2-doc"
             }
           ],
-          "store_path": "/nix/store/d5b37ka97jcdax2gc3sd8bhzj2j7g6gj-nginx-1.26.2"
+          "store_path": "/nix/store/4gdnsgmznm92xyi7cmc68xblvz09ankm-nginx-1.26.2"
         },
         "x86_64-darwin": {
           "outputs": [
