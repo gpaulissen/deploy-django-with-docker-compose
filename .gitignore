@@ -135,3 +135,4 @@ dmypy.json
 devbox.d/nginx/nginx.conf
 \.gitignore
 \.DS_Store
+devbox.d/nginx/nginx.template

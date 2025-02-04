@@ -29,7 +29,7 @@ case "${APP_SERVER:-}" in
             app.wsgi
         ;;
     uwsgi)
-        uwsgi --socket :8000 --workers 4 --master --enable-threads --module app.wsgi
+        uwsgi --socket ${NGINX_TMPDIR}/uwsgi.sock --workers 4 --master --enable-threads --module app.wsgi
         ;;
     *)
         DEBUG=0

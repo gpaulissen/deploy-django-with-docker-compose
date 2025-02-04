@@ -22,7 +22,7 @@ http {
         }
 
         location / {
-            uwsgi_pass              localhost:8000;
+            uwsgi_pass              unix://${NGINX_TMPDIR}/uwsgi.sock;
             include                 ${NGINX_CONFDIR}/uwsgi_params;
             client_max_body_size    10M;
         }
