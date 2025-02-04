@@ -1,5 +1,8 @@
 version: "0.5"
 is_strict: true
+environment:
+  - NGINX_WEB_PORT=8000
+
 processes:
   nginx:
     environment:
